@@ -1,14 +1,14 @@
 package model;
 
 public class EstatisticasJogadorCartoes {
-    private Integer partidaId;
-    private Integer rodada;
-    private String clube;
-    private String cartao;
-    private String atleta;
-    private Integer numCamisa;
-    private String posicao;
-    private String minuto;
+    private final Integer partidaId;
+    private final Integer rodada;
+    private final String clube;
+    private final String cartao;
+    private final String atleta;
+    private final Integer numCamisa;
+    private final String posicao;
+    private final String minuto;
 
     public EstatisticasJogadorCartoes(Integer partidaId, Integer rodada, String clube, String cartao, String atleta, Integer numCamisa, String posicao, String minuto) {
         this.partidaId = partidaId;
@@ -25,65 +25,65 @@ public class EstatisticasJogadorCartoes {
         return partidaId;
     }
 
-    public void setPartidaId(Integer partidaId) {
+   /* public void setPartidaId(Integer partidaId) {
         this.partidaId = partidaId;
-    }
+    }*/
 
     public Integer getRodada() {
         return rodada;
     }
 
-    public void setRodada(Integer rodada) {
+   /* public void setRodada(Integer rodada) {
         this.rodada = rodada;
-    }
+    }*/
 
     public String getClube() {
         return clube;
     }
 
-    public void setClube(String clube) {
+   /* public void setClube(String clube) {
         this.clube = clube;
-    }
+    }*/
 
     public String getCartao() {
         return cartao;
     }
 
-    public void setCartao(String cartao) {
+   /* public void setCartao(String cartao) {
         this.cartao = cartao;
-    }
+    }*/
 
     public String getAtleta() {
         return atleta;
     }
 
-    public void setAtleta(String atleta) {
+    /*public void setAtleta(String atleta) {
         this.atleta = atleta;
-    }
+    }*/
 
     public Integer getNumCamisa() {
         return numCamisa;
     }
 
-    public void setNumCamisa(Integer numCamisa) {
+    /*public void setNumCamisa(Integer numCamisa) {
         this.numCamisa = numCamisa;
-    }
+    }*/
 
     public String getPosicao() {
         return posicao;
     }
 
-    public void setPosicao(String posicao) {
+    /*public void setPosicao(String posicao) {
         this.posicao = posicao;
-    }
+    }*/
 
     public String getMinuto() {
         return minuto;
     }
 
-    public void setMinuto(String minuto) {
+    /*public void StringsetMinuto(String minuto) {
         this.minuto = minuto;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -99,4 +99,6 @@ public class EstatisticasJogadorCartoes {
         sb.append('}');
         return sb.toString();
     }
+    // apagar set e colocar vaiaveis final
 }
+
