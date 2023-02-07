@@ -30,7 +30,7 @@ public class EstatisticasJogoController {
                 BufferedReader br = new BufferedReader(streamReader);
                 Stream<String> lines = br.lines()){
 
-                List<String> linhas = lines.toList();
+                List<String> linhas = lines.map(s -> s.replaceAll("\"", "")).toList();
                 int contLinhas = 0;
 
                 for(String linha: linhas){
@@ -40,13 +40,13 @@ public class EstatisticasJogoController {
                     }
                     String[] dados = linha.split(CSV_SEPARATOR);
 
-                    LocalDate dataPartida = LocalDate.parse(dados[2].replace("\"", ""), DateTimeFormatter.ofPattern("d/M/yyyy"));
-                    String clubeMandante = dados[4].replace("\"", "");
-                    String clubeVisitante = dados[5].replace("\"", "");
-                    String clubeVencedor = dados[10].replace("\"", "");
-                    Estado estado = Estado.valueOf(dados[14].replace("\"", ""));
-                    Integer mandantePlacar = Integer.parseInt(dados[12].replace("\"", ""));
-                    Integer visitantePlacar = Integer.parseInt(dados[13].replace("\"", ""));
+                    LocalDate dataPartida = LocalDate.parse(dados[2], DateTimeFormatter.ofPattern("d/M/yyyy"));
+                    String clubeMandante = dados[4];
+                    String clubeVisitante = dados[5];
+                    String clubeVencedor = dados[10];
+                    Estado estado = Estado.valueOf(dados[14]);
+                    Integer mandantePlacar = Integer.parseInt(dados[12]);
+                    Integer visitantePlacar = Integer.parseInt(dados[13]);
 
                     EstatisticasJogo estatisticasJogo = new EstatisticasJogo(dataPartida, clubeVencedor, estado, mandantePlacar, visitantePlacar, clubeMandante, clubeVisitante);
 
@@ -99,3 +99,5 @@ public class EstatisticasJogoController {
                 .stream().toList();
     }
 }
+
+// add essa linha para evitar o replace em todas as linhas de vetor List<String> linhas = lines.map(s -> s.replaceAll("\"", "")).toList();

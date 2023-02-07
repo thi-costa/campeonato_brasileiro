@@ -11,14 +11,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class EstatisticasJogo {
-    private LocalDate dataPartida;
-    private String clubeVencedor;
-    private Estado estado;
-    private Integer mandantePlacar;
-    private Integer visitantePlacar;
-    private Integer totalGols;
-    private String clubeMantante;
-    private String clubeVisitante;
+    private final LocalDate dataPartida;
+    private final String clubeVencedor;
+    private final Estado estado;
+    private final Integer mandantePlacar;
+    private final Integer visitantePlacar;
+    private final Integer totalGols;
+    private final String clubeMantante;
+    private final String clubeVisitante;
 
 
     public EstatisticasJogo(LocalDate dataPartida, String clubeVencedor, Estado estado, Integer mandantePlacar,
@@ -37,49 +37,49 @@ public class EstatisticasJogo {
         return dataPartida;
     }
 
-    public void setDataPartida(LocalDate dataPartida) {
+    /*public void setDataPartida(LocalDate dataPartida) {
         this.dataPartida = dataPartida;
-    }
+    }*/
 
     public String getClubeVencedor() {
         return clubeVencedor;
     }
 
-    public void setClubeVencedor(String clubeVencedor) {
+    /*public void setClubeVencedor(String clubeVencedor) {
         this.clubeVencedor = clubeVencedor;
-    }
+    }*/
 
     public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    /*public void setEstado(Estado estado) {
         this.estado = estado;
-    }
+    }*/
 
     public Integer getMandantePlacar() {
         return mandantePlacar;
     }
 
-    public void setMandantePlacar(Integer mandantePlacar) {
+    /*public void setMandantePlacar(Integer mandantePlacar) {
         this.mandantePlacar = mandantePlacar;
-    }
+    }*/
 
     public Integer getVisitantePlacar() {
         return visitantePlacar;
     }
 
-    public void setVisitantePlacar(Integer visitantePlacar) {
+    /*public void setVisitantePlacar(Integer visitantePlacar) {
         this.visitantePlacar = visitantePlacar;
-    }
+    }*/
 
     public Integer getTotalGols() {
         return totalGols;
     }
 
-    public void setTotalGols(Integer totalGols) {
+    /*public void setTotalGols(Integer totalGols) {
         this.totalGols = totalGols;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -98,15 +98,15 @@ public class EstatisticasJogo {
         return clubeMantante;
     }
 
-    public void setClubeMantante(String clubeMantante) {
+    /*public void setClubeMantante(String clubeMantante) {
         this.clubeMantante = clubeMantante;
-    }
+    }*/
 
     public String getClubeVisitante() {
         return clubeVisitante;
     }
 
-    public void setClubeVisitante(String clubeVisitante) {
+    /*public void setClubeVisitante(String clubeVisitante) {
         this.clubeVisitante = clubeVisitante;
-    }
+    }*/
 }
