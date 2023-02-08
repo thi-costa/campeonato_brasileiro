@@ -30,8 +30,8 @@ public class EstatisticasJogadorController {
             for (String linha : linhas) {
                 String [] dados = linha.split(CSV_SEPARATOR);
 
-                Integer partidaId = Integer.parseInt(dados[0].replaceAll("\"", ""));
-                Integer rodada = Integer.parseInt(dados[1].replaceAll("\"", ""));
+                Integer partidaId = Integer.parseInt(dados[0].replace("\"", ""));
+                Integer rodada = Integer.parseInt(dados[1].replace("\"", ""));
                 String clube = dados[2];
                 String atleta = dados[3];
                 String minuto = dados[4];
@@ -73,8 +73,8 @@ public class EstatisticasJogadorController {
             for (String linha : linhas) {
                 String[] dados = linha.split(CSV_SEPARATOR);
 
-                Integer partidaId = Integer.parseInt(dados[0].replaceAll("\"", ""));
-                Integer rodada = Integer.parseInt(dados[1].replaceAll("\"", ""));
+                Integer partidaId = Integer.parseInt(dados[0].replace("\"", ""));
+                Integer rodada = Integer.parseInt(dados[1].replace("\"", ""));
                 String clube = dados[2];
                 String tipoCartao = dados[3];
                 String atleta = dados[4];
