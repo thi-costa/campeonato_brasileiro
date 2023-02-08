@@ -1,14 +1,24 @@
 package view;
 
 import controller.EstatisticasJogadorController;
+import controller.EstatisticasJogoController;
+import util.ConsoleUIHelper;
 
 import java.io.IOException;
 import java.util.Map;
 
 public class JogadorView {
+    private static EstatisticasJogadorController estatisticasJogadorController;
+
+    public JogadorView() {
+        if (estatisticasJogadorController == null) {
+            estatisticasJogadorController = new EstatisticasJogadorController();
+        }
+    }
+
     public static void imprimirDados() throws IOException {
-        System.out.println("ESTATÍSTICAS - JOGADORES");
-        System.out.println("-=".repeat(45));
+
+        ConsoleUIHelper.drawHeader("ESTATÍSTICAS - JOGADORES", 80);
 
         imprimirDadosJogadorComMaisGols("");
         imprimirDadosJogadorComMaisGols("Penalty");
@@ -19,7 +29,6 @@ public class JogadorView {
 
     }
     public static void imprimirDadosJogadorComMaisGols(String tipoDeGol) throws IOException {
-        EstatisticasJogadorController estatisticasJogadorController = new EstatisticasJogadorController();
         String descricaoGol = "";
 
         if(!tipoDeGol.equals("")){
@@ -34,7 +43,6 @@ public class JogadorView {
     }
 
     public static void imprimirDadosJogadorComMaisCartoes(String tipoDeCartao) throws IOException {
-        EstatisticasJogadorController estatisticasJogadorController = new EstatisticasJogadorController();
 
         Map<String, Long> mapJogadorECartoesAmarelos = estatisticasJogadorController.getJogadorComMaisCartoes(tipoDeCartao);
         System.out.println("Jogador com + cartões " + tipoDeCartao + "s (Jogador | Cartões): \n\t"

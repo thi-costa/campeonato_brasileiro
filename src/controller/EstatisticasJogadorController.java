@@ -8,55 +8,45 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class EstatisticasJogadorController {
+    private static final String CSV_SEPARATOR = ",";
+
     public List<EstatisticasJogadorGols> getEstatisticasJogadorGols() throws IOException {
+        Path path = Paths.get("src/dados/campeonato-brasileiro-gols.csv");
         List<EstatisticasJogadorGols> listaEstatisticasJogadorGols = new ArrayList<>();
 
-        String urlString = "https://raw.githubusercontent.com/vconceicao/ada_brasileirao_dataset/master/campeonato-brasileiro-gols.csv";
-        final String CSV_SEPARATOR = ",";
-        URL url = new URL(urlString);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        try (Stream<String> lines = Files.lines(path)) {
 
+            List<String> linhas = lines.collect(Collectors.toList());
+            linhas.remove(0);
 
+            for (String linha : linhas) {
+                String [] dados = linha.split(CSV_SEPARATOR);
 
-        if(connection.getResponseCode() == 200){
-            try(InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
-                BufferedReader br = new BufferedReader(streamReader);
-                Stream<String> lines = br.lines()){
+                Integer partidaId = Integer.parseInt(dados[0].replaceAll("\"", ""));
+                Integer rodada = Integer.parseInt(dados[1].replaceAll("\"", ""));
+                String clube = dados[2];
+                String atleta = dados[3];
+                String minuto = dados[4];
+                String tipoGol = dados[5];
 
-                List<String> linhas = lines.toList();
-                int contLinhas = 0;
-
-                for(String linha: linhas){
-                    if(contLinhas == 0){
-                        contLinhas++;
-                        continue;
-                    }
-                    String[] dados = linha.split(CSV_SEPARATOR);
-
-                    Integer partidaId = Integer.parseInt(dados[0].replace("\"", ""));
-                    Integer rodada = Integer.parseInt(dados[1].replace("\"", ""));
-                    String clube = dados[2].replace("\"", "");
-                    String atleta = dados[3].replace("\"", "");
-                    String minuto = dados[4].replace("\"", "");
-                    String tipoDeGol = dados[5].replace("\"", "");
-
-                    EstatisticasJogadorGols estatisticasJogadorGols = new EstatisticasJogadorGols(partidaId, rodada, clube, atleta, minuto, tipoDeGol);
-
-                    listaEstatisticasJogadorGols.add(estatisticasJogadorGols);
-                }
-
-            } catch (IOException e){
-                e.printStackTrace();
+                EstatisticasJogadorGols gol = new EstatisticasJogadorGols(partidaId, rodada, clube, atleta, minuto, tipoGol);
+                listaEstatisticasJogadorGols.add(gol);
             }
-        }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return listaEstatisticasJogadorGols;
     }
+
     public Map<String, Long> getJogadorComMaisGols(String tipoDeGol) throws IOException {
         List<EstatisticasJogadorGols> listaEstatisticasJogadorGols = getEstatisticasJogadorGols();
 
@@ -70,53 +60,36 @@ public class EstatisticasJogadorController {
                         Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new
                 ));
     }
-
     public List<EstatisticasJogadorCartoes> getEstatisticasJogadorCartoes() throws IOException {
         List<EstatisticasJogadorCartoes> listaEstatisticasJogadorCartoes = new ArrayList<>();
+        Path path = Paths.get("src/dados/campeonato-brasileiro-cartoes.csv");
 
-        String urlString = "https://raw.githubusercontent.com/vconceicao/ada_brasileirao_dataset/master/campeonato-brasileiro-cartoes.csv";
-        final String CSV_SEPARATOR = ",";
-        URL url = new URL(urlString);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        try (
+                Stream<String> lines = Files.lines(path)) {
 
-        if(connection.getResponseCode() == 200) {
-            try (InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
-                 BufferedReader br = new BufferedReader(streamReader);
-                 Stream<String> lines = br.lines()) {
+            List<String> linhas = lines.collect(Collectors.toList());
+            linhas.remove(0);
 
-                List<String> linhas = lines.toList();
-                int contLinhas = 0;
+            for (String linha : linhas) {
+                String[] dados = linha.split(CSV_SEPARATOR);
 
-                for (String linha : linhas) {
-                    if (contLinhas == 0) {
-                        contLinhas++;
-                        continue;
-                    }
-                    String[] dados = linha.split(CSV_SEPARATOR);
+                Integer partidaId = Integer.parseInt(dados[0].replaceAll("\"", ""));
+                Integer rodada = Integer.parseInt(dados[1].replaceAll("\"", ""));
+                String clube = dados[2];
+                String tipoCartao = dados[3];
+                String atleta = dados[4];
+                String posicao = dados[6];
 
-                    Integer partidaId = Integer.parseInt(dados[0].replace("\"", ""));
-                    Integer rodada = Integer.parseInt(dados[1].replace("\"", ""));
-                    String clube = dados[2].replace("\"", "");
-                    String cartao = dados[3].replace("\"", "");
-                    String atleta = dados[4].replace("\"", "");
-                    Integer numCamisa = 1;
-                    String posicao = dados[5].replace("\"", "");
-                    String minuto = dados[5].replace("\"", "");
-
-                    EstatisticasJogadorCartoes estatisticasJogadorCartoes = new EstatisticasJogadorCartoes(
-                            partidaId, rodada, clube, cartao, atleta, numCamisa, posicao, minuto
-                    );
-
-                    listaEstatisticasJogadorCartoes.add(estatisticasJogadorCartoes);
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
+                EstatisticasJogadorCartoes estatisticasJogadorCartoes = new EstatisticasJogadorCartoes(partidaId, rodada, clube, tipoCartao, atleta, posicao);
+                listaEstatisticasJogadorCartoes.add(estatisticasJogadorCartoes);
             }
+
+        } catch (
+                IOException e) {
+            e.printStackTrace();
         }
-
-
         return listaEstatisticasJogadorCartoes;
+
     }
 
     public Map<String, Long> getJogadorComMaisCartoes(String cartao) throws IOException{

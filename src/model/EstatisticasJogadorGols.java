@@ -1,12 +1,12 @@
 package model;
 
 public class EstatisticasJogadorGols {
-    private Integer partidaId;
-    private Integer rodada;
-    private String clube;
-    private String atleta;
-    private String minuto;
-    private String tipoDeGol;
+    private final Integer partidaId;
+    private final Integer rodada;
+    private final String clube;
+    private final String atleta;
+    private final String minuto;
+    private final String tipoDeGol;
 
     public EstatisticasJogadorGols(Integer partidaId, Integer rodada, String clube, String atleta, String minuto, String tipoDeGol) {
         this.partidaId = partidaId;
@@ -21,48 +21,23 @@ public class EstatisticasJogadorGols {
         return partidaId;
     }
 
-    public void setPartidaId(Integer partidaId) {
-        this.partidaId = partidaId;
-    }
-
     public Integer getRodada() {
         return rodada;
     }
-
-    public void setRodada(Integer rodada) {
-        this.rodada = rodada;
-    }
-
     public String getClube() {
         return clube;
-    }
-
-    public void setClube(String clube) {
-        this.clube = clube;
     }
 
     public String getAtleta() {
         return atleta;
     }
 
-    public void setAtleta(String atleta) {
-        this.atleta = atleta;
-    }
-
     public String getMinuto() {
         return minuto;
     }
 
-    public void setMinuto(String minuto) {
-        this.minuto = minuto;
-    }
-
     public String getTipoDeGol() {
         return tipoDeGol;
-    }
-
-    public void setTipoDeGol(String tipoDeGol) {
-        this.tipoDeGol = tipoDeGol;
     }
 
     @Override

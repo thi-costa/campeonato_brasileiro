@@ -2,17 +2,24 @@ package view;
 
 import controller.EstatisticasJogoController;
 import enums.Estado;
+import util.ConsoleUIHelper;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class JogoView {
+    private static EstatisticasJogoController estatisticasJogoController;
+
+    public JogoView() {
+        if(estatisticasJogoController == null) {
+            estatisticasJogoController = new EstatisticasJogoController();
+        }
+    }
+
     public static void imprimirDados() throws IOException {
 
-        System.out.println("-=".repeat(45));
-        System.out.println("ESTATÍSTICAS - TIMES | Estados | Outros:");
-        System.out.println("-=".repeat(45));
+        ConsoleUIHelper.drawHeader("ESTATÍSTICAS - TIMES | ESTADOS | OUTROS:", 80);
 
 //        List<EstatisticasJogoController>
 
@@ -25,7 +32,6 @@ public class JogoView {
     }
 
     private static void imprimirDadosTimeQueMaisVenceu() throws IOException {
-        EstatisticasJogoController estatisticasJogoController = new EstatisticasJogoController();
 
         Map<String, Long> mapTimeQueMaisVenceu = estatisticasJogoController.getTimeQueMaisVenceu(2008);
         Long numeroDeVitorias = mapTimeQueMaisVenceu.get(mapTimeQueMaisVenceu.keySet().iterator().next());
@@ -40,11 +46,10 @@ public class JogoView {
     }
 
     public static void imprimirDadosEstadoComMenosJogos() throws IOException {
-        EstatisticasJogoController estatisticasJogoController = new EstatisticasJogoController();
 
         Map<Estado, Long> mapJogosPorEstado = estatisticasJogoController.getEstadoComMenosJogos();
         Long numeroJogosMenosEstado = mapJogosPorEstado.get(mapJogosPorEstado.keySet().iterator().next());
-        System.out.println("O Estado que teve menos jogos entre 2003-2022 (Estado | Jogos):");
+        System.out.println("Estado que teve menos jogos entre 2003-2022 (Estado | Jogos):");
         for(Map.Entry<Estado, Long> entry: mapJogosPorEstado.entrySet()){
             if(numeroJogosMenosEstado.equals(entry.getValue())){
                 System.out.println("\t" + entry.getKey() + " | " + entry.getValue());
@@ -58,7 +63,7 @@ public class JogoView {
 
         List<String> maioresPlacares = estatisticasJogoController.getMaioresPlacares();
 
-        System.out.println("O placar da partida com mais gols (Time Mandante Placar Mandante X Placar Visitante Time Visitante):");
+        System.out.println("Placar da partida com mais gols(Time | Placar Mandante X Placar | Time Visitante):");
         for(String placar: maioresPlacares){
             System.out.println("\t" + placar);
         }
