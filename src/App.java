@@ -7,6 +7,6 @@ public class App {
 
         Menu.imprimirDados();
 
-        System.out.println("-=-=-".repeat(7) + "PROGRAMA FINALIZADO!" + "=-=-=".repeat(7));
+        ConsoleUIHelper.drawHeader("PROGRAMA FINALIZADO!", 80);
     }
 }

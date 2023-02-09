@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -15,49 +18,34 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class EstatisticasJogoController {
+    private static final String CSV_SEPARATOR = ",";
     public List<EstatisticasJogo> getEstatisticasJogos() throws IOException {
+        Path path = Paths.get("src/dados/campeonato-brasileiro-full.csv");
         List<EstatisticasJogo> listaEstatisticasJogos = new ArrayList<>();
 
-        String urlString = "https://raw.githubusercontent.com/vconceicao/ada_brasileirao_dataset/master/campeonato-brasileiro-full.csv";
-        final String CSV_SEPARATOR = ",";
-        URL url = new URL(urlString);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        try (Stream<String> lines = Files.lines(path)) {
+            List<String> linhas = lines.map(s -> s.replaceAll("\"", "")).collect(Collectors.toList());
+            linhas.remove(0);
 
+            for (String linha : linhas) {
+                String[] dados = linha.split(CSV_SEPARATOR, -1);
 
+                LocalDate dataPartida = LocalDate.parse(dados[2], DateTimeFormatter.ofPattern("d/M/yyyy"));
+                String clubeMandante = dados[4];
+                String clubeVisitante = dados[5];
+                String clubeVencedor = dados[10];
+                Estado estado = Estado.valueOf(dados[14]);
+                Integer mandantePlacar = Integer.parseInt(dados[12]);
+                Integer visitantePlacar = Integer.parseInt(dados[13]);
 
-        if(connection.getResponseCode() == 200){
-            try(InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
-                BufferedReader br = new BufferedReader(streamReader);
-                Stream<String> lines = br.lines()){
+                EstatisticasJogo estatisticasJogo = new EstatisticasJogo(dataPartida, clubeVencedor, estado, mandantePlacar, visitantePlacar, clubeMandante, clubeVisitante);
 
-                List<String> linhas = lines.map(s -> s.replaceAll("\"", "")).toList();
-                int contLinhas = 0;
-
-                for(String linha: linhas){
-                    if(contLinhas == 0){
-                        contLinhas++;
-                        continue;
-                    }
-                    String[] dados = linha.split(CSV_SEPARATOR);
-
-                    LocalDate dataPartida = LocalDate.parse(dados[2], DateTimeFormatter.ofPattern("d/M/yyyy"));
-                    String clubeMandante = dados[4];
-                    String clubeVisitante = dados[5];
-                    String clubeVencedor = dados[10];
-                    Estado estado = Estado.valueOf(dados[14]);
-                    Integer mandantePlacar = Integer.parseInt(dados[12]);
-                    Integer visitantePlacar = Integer.parseInt(dados[13]);
-
-                    EstatisticasJogo estatisticasJogo = new EstatisticasJogo(dataPartida, clubeVencedor, estado, mandantePlacar, visitantePlacar, clubeMandante, clubeVisitante);
-
-                    listaEstatisticasJogos.add(estatisticasJogo);
-                }
-
-            } catch (IOException e){
-                e.printStackTrace();
+                listaEstatisticasJogos.add(estatisticasJogo);
             }
-        }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return listaEstatisticasJogos;
     }
 
@@ -100,4 +88,3 @@ public class EstatisticasJogoController {
     }
 }
 
-// add essa linha para evitar o replace em todas as linhas de vetor List<String> linhas = lines.map(s -> s.replaceAll("\"", "")).toList();
