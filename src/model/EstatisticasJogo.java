@@ -37,49 +37,25 @@ public class EstatisticasJogo {
         return dataPartida;
     }
 
-    /*public void setDataPartida(LocalDate dataPartida) {
-        this.dataPartida = dataPartida;
-    }*/
-
     public String getClubeVencedor() {
         return clubeVencedor;
     }
-
-    /*public void setClubeVencedor(String clubeVencedor) {
-        this.clubeVencedor = clubeVencedor;
-    }*/
 
     public Estado getEstado() {
         return estado;
     }
 
-    /*public void setEstado(Estado estado) {
-        this.estado = estado;
-    }*/
-
     public Integer getMandantePlacar() {
         return mandantePlacar;
     }
-
-    /*public void setMandantePlacar(Integer mandantePlacar) {
-        this.mandantePlacar = mandantePlacar;
-    }*/
 
     public Integer getVisitantePlacar() {
         return visitantePlacar;
     }
 
-    /*public void setVisitantePlacar(Integer visitantePlacar) {
-        this.visitantePlacar = visitantePlacar;
-    }*/
-
     public Integer getTotalGols() {
         return totalGols;
     }
-
-    /*public void setTotalGols(Integer totalGols) {
-        this.totalGols = totalGols;
-    }*/
 
     @Override
     public String toString() {
@@ -98,15 +74,7 @@ public class EstatisticasJogo {
         return clubeMantante;
     }
 
-    /*public void setClubeMantante(String clubeMantante) {
-        this.clubeMantante = clubeMantante;
-    }*/
-
     public String getClubeVisitante() {
         return clubeVisitante;
     }
-
-    /*public void setClubeVisitante(String clubeVisitante) {
-        this.clubeVisitante = clubeVisitante;
-    }*/
 }

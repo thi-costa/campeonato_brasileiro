@@ -21,47 +21,24 @@ public class EstatisticasJogadorGols {
         return partidaId;
     }
 
-    /*public void setPartidaId(Integer partidaId) {
-        this.partidaId = partidaId;
-    }*/
-
     public Integer getRodada() {
         return rodada;
     }
-
-    /*public void setRodada(Integer rodada) {
-        this.rodada = rodada;
-    }*/
-
     public String getClube() {
         return clube;
     }
-
-    /*public void setClube(String clube) {
-        this.clube = clube;
-    }*/
 
     public String getAtleta() {
         return atleta;
     }
 
-    /*public void setAtleta(String atleta) {
-        this.atleta = atleta;
-    }*/
-
     public String getMinuto() {
         return minuto;
     }
 
-    /*public void setMinuto(String minuto) {
-        this.minuto = minuto;
-    }*/
-
     public String getTipoDeGol() {
         return tipoDeGol;
     }
-
-    //public void setTipoDeGol(String tipoDeGol) { this.tipoDeGol = tipoDeGol; }
 
     @Override
     public String toString() {
