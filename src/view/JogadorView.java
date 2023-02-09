@@ -36,17 +36,30 @@ public class JogadorView {
         }
 
         Map<String, Long> mapJogadorEGols = estatisticasJogadorController.getJogadorComMaisGols(tipoDeGol);
-        System.out.println("Jogador com + gols " + descricaoGol + "(Jogador | Gols): \n\t"
-                + mapJogadorEGols.keySet().iterator().next() +" | "
-                + mapJogadorEGols.get(mapJogadorEGols.keySet().iterator().next()) + " gols");
-//            System.out.println(mapJogadorEGols);
+
+        Long qtdeGolsJogadorComMaisGols = mapJogadorEGols.get(mapJogadorEGols.keySet().iterator().next());
+
+        System.out.println("Jogador com + gols " + descricaoGol + "(Jogador | Gols):");
+        
+        for(Map.Entry<String, Long> entry: mapJogadorEGols.entrySet()){
+            if(qtdeGolsJogadorComMaisGols.equals(entry.getValue())){
+                System.out.printf("\t%s | %d gols\n", entry.getKey(), entry.getValue());
+            }
+        }
     }
 
     public static void imprimirDadosJogadorComMaisCartoes(String tipoDeCartao) throws IOException {
 
-        Map<String, Long> mapJogadorECartoesAmarelos = estatisticasJogadorController.getJogadorComMaisCartoes(tipoDeCartao);
-        System.out.println("Jogador com + cartões " + tipoDeCartao + "s (Jogador | Cartões): \n\t"
-                + mapJogadorECartoesAmarelos.keySet().iterator().next() + " | "
-                + mapJogadorECartoesAmarelos.get(mapJogadorECartoesAmarelos.keySet().iterator().next()) + " cartões" );
+        Map<String, Long> mapJogadorECartoes = estatisticasJogadorController.getJogadorComMaisCartoes(tipoDeCartao);
+
+        Long qtdeCartoesJogadorComMaisCartoes = mapJogadorECartoes.get(mapJogadorECartoes.keySet().iterator().next());
+
+        System.out.println("Jogador com + cartões " + tipoDeCartao + "s (Jogador | Cartões):");
+        
+        for(Map.Entry<String, Long> entry: mapJogadorECartoes.entrySet()){
+            if(qtdeCartoesJogadorComMaisCartoes.equals(entry.getValue())){
+                System.out.printf("\t%s | %d\n", entry.getKey(), entry.getValue());
+            }
+        }
     }
 }
