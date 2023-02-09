@@ -24,11 +24,11 @@ public class EstatisticasJogoController {
         List<EstatisticasJogo> listaEstatisticasJogos = new ArrayList<>();
 
         try (Stream<String> lines = Files.lines(path)) {
-            List<String> linhas = lines.collect(Collectors.toList());
+            List<String> linhas = lines.map(s -> s.replaceAll("\"", "")).collect(Collectors.toList());
             linhas.remove(0);
 
             for (String linha : linhas) {
-                String[] dados = linha.split(CSV_SEPARATOR);
+                String[] dados = linha.split(CSV_SEPARATOR, -1);
 
                 LocalDate dataPartida = LocalDate.parse(dados[2].replace("\"", ""), DateTimeFormatter.ofPattern("d/M/yyyy"));
                 String clubeMandante = dados[4].replace("\"", "");
@@ -87,3 +87,4 @@ public class EstatisticasJogoController {
                 .stream().toList();
     }
 }
+

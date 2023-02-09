@@ -53,3 +53,5 @@ public class EstatisticasJogadorGols {
         return sb.toString();
     }
 }
+
+// podemos retirar os set e colocar as variaveis como final

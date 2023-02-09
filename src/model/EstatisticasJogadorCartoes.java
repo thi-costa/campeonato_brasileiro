@@ -55,4 +55,6 @@ public class EstatisticasJogadorCartoes {
         sb.append('}');
         return sb.toString();
     }
+    // apagar set e colocar vaiaveis final
 }
+
