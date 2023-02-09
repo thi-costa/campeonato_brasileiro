@@ -13,7 +13,7 @@ Realizar leitura de arquivos CSV com os dados de jogos do campeonato brasileiro 
 * O placar da partida com mais gols.
 
 # Tópicos abordados no projeto
-* Streams
+* Streams, LocalDate, lambda expressions
 
 # Integrantes do Grupo
 * Ana Carolina Muratori
