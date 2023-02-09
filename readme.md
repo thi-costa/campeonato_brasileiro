@@ -16,8 +16,10 @@ Realizar leitura de arquivos CSV com os dados de jogos do campeonato brasileiro 
 * Streams
 
 # Integrantes do Grupo
-*
-*
-*
+* Ana Carolina Muratori
+* André Camargo
+* Camila Melo 
+* Eveliny Muniz 
+* Felipe Menezes de Almeida 
 * Thiago da Silva Costa Santos
 
