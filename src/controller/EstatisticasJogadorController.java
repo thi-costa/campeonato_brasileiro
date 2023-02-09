@@ -67,11 +67,11 @@ public class EstatisticasJogadorController {
         try (
                 Stream<String> lines = Files.lines(path)) {
 
-            List<String> linhas = lines.collect(Collectors.toList());
+            List<String> linhas = lines.map(s -> s.replaceAll("\"", "")).collect(Collectors.toList());
             linhas.remove(0);
 
             for (String linha : linhas) {
-                String[] dados = linha.split(CSV_SEPARATOR);
+                String[] dados = linha.split(CSV_SEPARATOR, -1);
 
                 Integer partidaId = Integer.parseInt(dados[0].replace("\"", ""));
                 Integer rodada = Integer.parseInt(dados[1].replace("\"", ""));
