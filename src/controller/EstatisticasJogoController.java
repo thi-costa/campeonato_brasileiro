@@ -30,13 +30,13 @@ public class EstatisticasJogoController {
             for (String linha : linhas) {
                 String[] dados = linha.split(CSV_SEPARATOR, -1);
 
-                LocalDate dataPartida = LocalDate.parse(dados[2].replace("\"", ""), DateTimeFormatter.ofPattern("d/M/yyyy"));
-                String clubeMandante = dados[4].replace("\"", "");
-                String clubeVisitante = dados[5].replace("\"", "");
-                String clubeVencedor = dados[10].replace("\"", "");
-                Estado estado = Estado.valueOf(dados[14].replace("\"", ""));
-                Integer mandantePlacar = Integer.parseInt(dados[12].replace("\"", ""));
-                Integer visitantePlacar = Integer.parseInt(dados[13].replace("\"", ""));
+                LocalDate dataPartida = LocalDate.parse(dados[2], DateTimeFormatter.ofPattern("d/M/yyyy"));
+                String clubeMandante = dados[4];
+                String clubeVisitante = dados[5];
+                String clubeVencedor = dados[10];
+                Estado estado = Estado.valueOf(dados[14]);
+                Integer mandantePlacar = Integer.parseInt(dados[12]);
+                Integer visitantePlacar = Integer.parseInt(dados[13]);
 
                 EstatisticasJogo estatisticasJogo = new EstatisticasJogo(dataPartida, clubeVencedor, estado, mandantePlacar, visitantePlacar, clubeMandante, clubeVisitante);
 
